@@ -48,18 +48,16 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        TestClass testClass = new TestClass();
+        ControllerTest controllerTest = new ControllerTest();
+        controllerTest.setFlag(true);
 
-        testClass.getGuns()
-                .subscribeOn(Schedulers.io())
-//                .map(this::sortConversation)
-                .flatMap(Observable::fromIterable)
-                .filter(gun -> gun.getSpeedBullet() < 200)
+        controllerTest.isFlag()
+                .flatMap(controllerTest::getShoes)
+                .flatMap(shoesList -> Observable.fromIterable(shoesList))
+                .filter(shoes -> shoes.getSize() < 38)
                 .toList()
                 .toObservable()
-                .doOnNext(guns -> Log.d("TAG", String.valueOf(guns.size())))
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(guns -> {
+                .subscribe(shoes -> {
                 }, throwable -> {
                 });
 
