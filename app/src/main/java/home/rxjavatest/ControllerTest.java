@@ -29,9 +29,9 @@ public class ControllerTest {
         if (isFlag) {
 
             return Observable.just(shoesList)
-                    .doOnNext(guns -> guns.add(new Shoes(39, "white", 7, false, false)))
-                    .doOnNext(guns -> guns.add(new Shoes(36, "blue", 3, true, false)))
-                    .doOnNext(guns -> guns.add(new Shoes(38, "red", 10, false, true)));
+                    .doOnNext(shoes -> shoes.add(new Shoes(39, "white", 7, false, false)))
+                    .doOnNext(shoes -> shoes.add(new Shoes(36, "blue", 3, true, false)))
+                    .doOnNext(shoes -> shoes.add(new Shoes(38, "red", 10, false, true)));
         } else {
             return Observable.error(new NullPointerException("error"));
         }

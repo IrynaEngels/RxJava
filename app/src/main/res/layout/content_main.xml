@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="368dp"
+    android:layout_height="495dp"
+    android:orientation="vertical">
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="495dp"
-        android:orientation="vertical">
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tv_1"
         android:layout_gravity="center"
-        android:layout_margin="20dp"
+        android:layout_marginTop="60dp"
         android:inputType="text" />
 
     <EditText
@@ -24,7 +21,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_2"
         android:layout_gravity="center"
-        android:layout_margin="20dp"
         android:inputType="text" />
 
     <EditText
@@ -32,9 +28,30 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_3"
         android:layout_gravity="center"
-        android:layout_margin="20dp"
         android:inputType="number" />
 
-    </LinearLayout>
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.SwitchCompat
+        android:id="@+id/switch_compat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="50dp"
+        android:checked="false"
+        android:text="SwitchCompat"
+        app:showText="false"/>
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set flag true" />
+
+
+</LinearLayout>

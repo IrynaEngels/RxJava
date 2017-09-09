@@ -5,12 +5,16 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -32,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
     EditText tv2;
     @BindView(R2.id.tv_3)
     EditText tv3;
+    @BindView(R2.id.switch_compat)
+    SwitchCompat sw_1;
+    @BindView(R2.id.button)
+    Button btn;
 
     @BindView(R2.id.fab)
     FloatingActionButton fab;
@@ -49,9 +57,19 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ControllerTest controllerTest = new ControllerTest();
-        controllerTest.setFlag(true);
 
-        controllerTest.isFlag()
+
+//        sw_1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                if(b)controllerTest.setFlag(true);
+//            }
+//        });
+        sw_1.setOnCheckedChangeListener((compoundButton, b) -> {
+                if(b)controllerTest.setFlag(true);
+            });
+
+       controllerTest.isFlag()
                 .flatMap(controllerTest::getShoes)
                 .flatMap(shoesList -> Observable.fromIterable(shoesList))
                 .filter(shoes -> shoes.getSize() < 38)
@@ -61,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 }, throwable -> {
                 });
 
-        fab.setOnClickListener(view -> showDialog());
+        btn.setOnClickListener(view -> showDialog());
     }
 
     @Override
@@ -83,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                         .map(value -> value.matches("\\+\\d{4}"))
 //                        .doOnNext(value -> checkAndSetError(value, errorPhone, txtPhoneText))
                 ,
-                (f1, f2, f3) -> f1 && f2 && f3)
+                (f1, f2, f3) -> f1 || f2 || f3)
                         .subscribeOn(AndroidSchedulers.mainThread())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(this::setSaveButtonVisible)
@@ -91,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setSaveButtonVisible(boolean flag) {
-        fab.setEnabled(flag);
+        btn.setEnabled(flag);
     }
 
     private void showDialog() {
